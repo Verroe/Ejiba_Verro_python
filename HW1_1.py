@@ -21,9 +21,11 @@ def openFile(filename):
     
 #Input your file name
 openFile(input('Enter file name: '))
-
-for word in openFile(input('Enter file name: ')):
-        word = "radar"
-        reverse = word[::-1] #write the words backward
-        if word == reverse:  #check for palindrome
-            print(word, 'is a palindrome') #Prints the word to the screen
+def is_palindrome: 
+    for word in openFile(input('Enter file name: ')):
+            word = "radar"
+            reverse = word[::-1] #write the words backward
+            if word == reverse:  #check for palindrome
+                print(word, 'is a palindrome') #Prints the word to the screen
+            else:
+                print(word, 'is not a palidrome')
