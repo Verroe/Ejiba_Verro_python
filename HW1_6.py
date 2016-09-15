@@ -16,13 +16,11 @@ def openFile(filename):
     file = open('filename.txt')
     file.read().split()
 
-#Solution to number 6: Number lines on the copied version of a specific file
-example = '''Love your neighbor as you love yourself \n 
-            This is the command from the Lord of Israel \n 
-            Put your trust and whole heart in it '''
+'''Solution to number 6: Number lines on the copied version of a specific file'''
+#Open the desired file
+example = openFile(input('Enter file name: ')
 
 #open the desired file
-#file = openFile(input('Enter file name: ')) 
 sep = example.splitlines()
 if ' ' in sep :
     sep.remove(' ')
