@@ -23,10 +23,11 @@ example = '''Love your neighbor as you love yourself \n
 
 #open the desired file
 #file = openFile(input('Enter file name: ')) 
-#nlines = len(io.readline(example))  #Get the number of lines
-for word in example:
-    word
-    for index in range(1, n):
-        line = example.next()
-        enumerate(line)
-print(example)
+sep = example.splitlines()
+if ' ' in sep :
+    sep.remove(' ')
+n = len(sep)
+print(n, "is the total number of lines")
+
+for (num, line) in enumerate(sep):
+    print('%d %s' % (num + 1, line))
