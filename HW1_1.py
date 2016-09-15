@@ -18,12 +18,9 @@ A function to open and read the file to read to be checked for palindrome'''
 def openFile(filename):
     file = open('filename.txt')
     file.read().split()
-    
-#Input your file name
-openFile(input('Enter file name: '))
+#Palindrome function
 def is_palindrome: 
     for word in openFile(input('Enter file name: ')):
-            word = "radar"
             reverse = word[::-1] #write the words backward
             if word == reverse:  #check for palindrome
                 print(word, 'is a palindrome') #Prints the word to the screen
