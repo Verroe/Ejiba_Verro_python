@@ -20,19 +20,19 @@ def openFile(filename):
 '''Solution to number 5: Print all hapaxes in a given file name text
     A function that find all the hapaxes
     given the following text check for the word that appears once '''
-    
-sent = "Life is beautiful and it is life" 
+#Open desired file 
+file = openFile(input('Enter file name: '))
 #Changes all capital letters to lowercase and
 #Separates the sentence in words
-wlist = sent.lower().split() 
-newlist = set() #A new set to store words one time
+wlist = file.lower().split() 
+newlist = set() #A new set to store unduplicated words
 rlist = set() #A set to store all the words that have been removed
-#def hapax(openFile(input('Enter file name: ')))
-for word in wlist: 
-    if word not in newlist:
-        newlist.add(word) #Add nonrepeated words to the new set
-    else:
-        rlist.add(word) #Add all duplicate to remove set
-    if word in rlist:
-        newlist.remove(word) #Remove words that appear in the 2 sets
-print(newlist)
+def hapax(file)
+    for word in wlist: 
+        if word not in newlist:
+            newlist.add(word) #Add nonrepeated words to the new set
+        else:
+            rlist.add(word) #Add all duplicate to remove set
+        if word in rlist:
+            newlist.remove(word) #Remove words that appear in the 2 sets
+    print(newlist)
