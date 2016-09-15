@@ -6,8 +6,8 @@ Created on Wed Sep 14 20:51:38 2016
 """
 
 import os 
-import io
-import re 
+#import io
+#import re 
 print(os.getcwd()) #Check the working directory 
 os.chdir(input('Enter new directory: ')) #Change to the desired directory
 
