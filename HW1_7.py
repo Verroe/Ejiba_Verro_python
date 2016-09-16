@@ -6,11 +6,8 @@ Created on Thu Sep  8 19:25:15 2016
 """
 #Verro Ejiba Group A Homework 1 Due 9/15/2016
 import os 
-import io
-import re 
 print(os.getcwd()) #Check the working directory 
 os.chdir(input('Enter new directory: ')) #Change to the desired directory
-
 
 '''Solution to number 7: A program that calculates the average word length of 
         a text stored in a file '''
