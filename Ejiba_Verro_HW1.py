@@ -294,6 +294,31 @@ anagramGame()
  one can play Lingo. Use square brackets to mark characters correct in the 
  sense of 1), and ordinary parentheses to mark characters correct in the sense of 2).'''
 
+def lingo_game():
+    print('Welcome to Lingo! You will need to guess a letter in a word containing 5 characters')
+    hidden = 'tiger' #hidden word
+    while True:
+        guess = input('Guess a letter: ') #prompts the user to enter a guess
+        lhidden = list(hidden) #put the letters in hidden to a list
+        lguess = list(guess) #put the letters in guess to a list
+            
+        if hidden == guess: #if all the letters in both hidden and guess are = print the word
+            print('[t][i][g][e][r]')
+            break
+            
+        for i in range(len(lguess)):
+            if lguess[i] == lhidden[i]: #add then print the letter that are the same and the same position
+                keep =('[',lguess[i],']')
+                lguess[i]=''.join(keep)
+                print(lguess[i])
+            elif lguess in hidden: #put a () for a correct guessed letter that is in a wrong position
+                nkeep =('(',lguess[i],')')
+                lguess[i]=''.join(nkeep)
+        clue = ''.join(lguess) #convert to string
+        print('Clue: ', clue) #print the clue
+            
+lingo_game()
+
 #Problem 11    
 ''' A sentence splitter is a program capable of splitting a text into sentences. 
 The standard set of heuristics for sentence splitting includes 
@@ -332,6 +357,91 @@ sep = re.split('(?<!\w\.\w.)(?<![A-Z]\.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s' , text)
 #Prints the string following the pattern listed above in a new line
 for i in sep :
     print(i + '\n')
+
+
+#Problem 12
+#Not finished
+
+#Problem 13
+
+''' Your task in this exercise is as follows:  a. Generate a string with N 
+opening brackets ("[") and N closing brackets ("]"), in some arbitrary order. 
+b. Determine whether the generated string is balanced; that is, whether it 
+consists entirely of pairs of  opening/closing brackets (in that order), none 
+of which mis-nest'''
+import random
+#function that takes an integer n as a parameter
+def string_gen(n):
+    string = '' #create an empty string
+    for i in range(2*n): #doubles the integer because the strings go in pairs               
+        if random.randint(0,1) == 0:    #generates random number between 0 and 1 
+            string += '[' #add [  to the string if the generated num = 0
+        else: 
+            string += ']' #add ] otherwise
+    return(string)
+#a function that checks if the generated string is balanced
+def check(string):
+    counter = 0 #
+    for i in range (len(string)):     #loops through the length of string
+        if string[i] == '[':          #the string at ith position is '[' 
+            counter += 1              #increment counter by 1
+        else:                         #decrease counter by 1 otherwise       
+            counter -= 1 
+            if counter < 0:            #counter < 0 is unbalanced therefore quit
+                break
+            
+    if counter == 0:                  #string is balanced when counter = 0
+        print(string, '\nOk')
+    else:                               #unbalanced otherwise
+        print(string, '\nNotOk')
+
+check(string_gen(0))
+check(string_gen(1))
+check(string_gen(2))
+check(string_gen(3))
+
+#Pokemon
+
+
+#Problem 14
+''' An alternade is a word in which its letters, taken alternatively in a strict 
+sequence, and used in the same order as the original word, make up at least two 
+other words. All letters must be used, but the smaller words are not necessarily 
+of the same length. For example, a word with seven letters where every second 
+letter is used will produce a four-letter word and a three-letter word.'''
+
+filename = input('Enter file name: ')
+
+def alternade(filename):
+    
+    with open(filename) as file: 
+        wordbank = file.read().split() #read the filea nd separate line into words
+        
+        for word in wordbank:
+            smallword_1 = '' #create an empty string to store the first new word
+            smallword_2 = '' #create an empty string to store the 2nd word
+            word_1 = ''
+            word_2 = ''
+    
+        if len(word) == 1: #case with word of 1 character can't make a word
+            print('"' + word + '": makes no word.')
+        elif(len(word)>1): #for words with more than 1 character
+            for i in range(len(word)):
+                if i%2==0: #get character in an even # position
+                    smallword_1 = smallword_1 + word[i] #add word at that position to the first small word
+                elif i%2 ==1: #get character in an odd # position
+                    smallword_2 = smallword_2 + word[i] #add word at that position to the second small word
+        for j in range (len(wordbank)):
+            if(smallword_1 == wordbank[j]): #check if the 1st small word is in the word list
+                word_1 = wordbank[j]        #assign it to word_1
+            elif smallword_2 == wordbank[j]:#do the same for the 2nd small word
+                word_2 = wordbank[j];       #assign it to word_2
+    
+        if word_1 != '' and word_2 !='':  #two new small words are made when word1 is not the same as word2
+            print(word + ' makes ' + word_1 +' and ' + word_2 +'\n')
+
+alternade(filename)
+
     
 
 
