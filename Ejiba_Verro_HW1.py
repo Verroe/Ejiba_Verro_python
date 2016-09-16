@@ -205,11 +205,133 @@ def avgFile(filename):
     print(count, total, avg)
 avgFile(filename)
 
-#Problem 8
+#solution to problem 8
 
-        
+import random
+
+   """
+      This function is a "Guess the number"-game, where the number to be guessed 
+      is randomly chosen between 1 and 20. Write a program able to play the "Guess the number"-game, where the number to be guessed is randomly chosen between 1 and 20. (Source: http://inventwithpython.com) 
+      This is how it should work when run in a terminal:  
+      >>> import guess_number Hello! What is your name? Torbjörn Well, Torbjörn, 
+      I am thinking of a number between 1 and 20. Take a guess.  10 Your guess 
+      is too low. Take a guess. 15 Your guess is too low. Take a guess. 18 Good 
+      job, Torbjörn! You guessed my number in 3 guesses!
+     """
+#No parameters needed     
+def guess_number():
+  
+     print('Hello! What is your name? ')
+     name = input() #user enter name
+     print('\n') #new line
+     print('Well, ',name,', ', 'I am thinking of a number between 1 and 20. Take a guess.')
+     count = 0 #count the number of guesses starting at 0
+     num = random.randint(1, 20) #stores a random number between 1 and 20 into num
+     
+     while True:
+         guess = int(input()) #user input guessed number
+         if guess < num: #check if the guessed number < the generated random num
+             count += 1 #increment count by 1 for the guess
+             print('Your guess is too low. Take a guess') #print this to the console
+         elif guess > num: #check if the guessed num > the generated random num
+             count += 1 
+             print('Your guess is too high. Take a guess')
+         elif guess == num: #case when the user guessed right 
+             count += 1
+             print('Good job,',name,'! You guessed my number in', count, 'guesses!')
+             break
+ 
+guess_number() 
+
+#Problem 9
+
+'''An anagram is a type of word play, the result of rearranging the letters of 
+a word or phrase to produce a new word or phrase, using
+all the original letters exactly once; e.g., orchestra = carthorse, A decimal 
+point = I'm a dot in place. Write a Python program that, when started 1) 
+randomly picks a word w from given list of words, 2) randomly permutes w 
+(thus creating an anagram of w), 3) presents the anagram to the user, and 4) 
+enters an interactive loop in which the user is invited to guess the original 
+word'''
+
+import numpy, random
+
+color = ['orange', 'yellow', 'blue', 'red', 'brown'] #list of word choices
+num = random.randint(0, len(color)-1) #select a random number from the length of a word from the list "color"
+word = color[num] #hids the word that it at the position num -- from random selection
+
+
+def anagramgenerator(choice):
+    order = numpy.random.choice(len(choice), len(choice), replace = False) #permutes the order of a given word
+    print(order)
+    anagram = ''
+    for i in range(len(order)):
+        anagram = anagram + choice[order[i]] #add the word from permutation to make anagram
+    return(anagram)
     
-    
+
+anagram = anagramgenerator(word)
+
+def anagramGame():
+    print('***Anagram***\n')
+    print('Color word anagram: ',anagram,'\n') #prints the permutated word 
+    while True:    
+        guess = input('Guess the color word: ')#prompts user to enter guess
+        if guess != word:
+            print('Incorrect, guess again.')
+        elif guess == word:
+            print('Correct!')
+            break
+            
+anagramGame()
+
+#Problem 10
+'''In a game of Lingo, there is a hidden word, five characters long. The object
+ of the game is to find this word by guessing, and in return receive two kinds 
+ of clues: 1) the characters that are fully correct, with respect to identity 
+ as well as to position, and 2) the characters that are indeed present in the 
+ word, but which are placed in the wrong position. Write a program with which 
+ one can play Lingo. Use square brackets to mark characters correct in the 
+ sense of 1), and ordinary parentheses to mark characters correct in the sense of 2).'''
+
+#Problem 11    
+''' A sentence splitter is a program capable of splitting a text into sentences. 
+The standard set of heuristics for sentence splitting includes 
+(but isn't limited to) the following rules:
+Sentence boundaries occur at one of "." (periods), "?" or "!", except that
+a. Periods followed by whitespace followed by a lower case letter are not 
+sentence boundaries.  
+b. Periods followed by a digit with no intervening whitespace are not sentence boundaries.  
+c. Periods followed by whitespace and then an upper case letter, but preceded 
+by any of a short list of titles are  not sentence boundaries. Sample titles 
+include Mr., Mrs., Dr., and so on.  
+d. Periods internal to a sequence of letters with no adjacent whitespace are 
+not sentence boundaries (for  example, www.aptex.com, or e.g).  
+e. Periods followed by certain kinds of punctuation (notably comma and more periods) 
+are probably not sentence boundaries.Your task here is to write a program that 
+given the name of a text file is able to write its content with each sentence 
+on a separate line.
+ 
+Test your program with the following short text: 
+Mr. Smith bought cheapsite.com for 1.5 
+million dollars, i.e. he paid a lot for it. Did he mind? Adam Jones Jr. thinks 
+he didn't. In any case, this isn't true... Well, with a probability of .9 it 
+isn't. The result should be:
+Mr. Smith bought cheapsite.com for 1.5 million dollars, i.e. he paid a lot for
+it. Did he mind? Adam Jones Jr. thinks he didn't. In any case, this isn't true...
+  Well, with a probability of .9 it isn't. '''
+
+import re
+
+#Number 11
+text = '"Droll?" said Mr. Newman, laughing too. "Did you ever hear of Christopher Columbus?"'
+text2 = "Mr. Smith bought cheapsite.com for 1.5 million dollars, i.e. he paid a lot for it. Did he mind? Adam Jones Jr. thinks he didn't. In any case, this isn't true... Well, with a probability of .9 it isn't."
+#splits the sentence following patterns in the parenteses
+sep = re.split('(?<!\w\.\w.)(?<![A-Z]\.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s' , text)
+
+#Prints the string following the pattern listed above in a new line
+for i in sep :
+    print(i + '\n')
     
 
 
