@@ -13,6 +13,7 @@ os.chdir(input('Enter new directory: ')) #Change to the desired directory
 '''Solution to number 1
 A function to open and read the file to read to be checked for palindrome'''
 
+<<<<<<< HEAD
     
 
 def is_palindrome(word):
@@ -41,3 +42,16 @@ while line: #makes sure there are no empty string in line
     line = file.readline() #reads the next line
         
 file.close()
+=======
+def openFile(filename):
+    file = open('filename.txt')
+    file.read().split()
+#Palindrome function
+def is_palindrome: 
+    for word in openFile(input('Enter file name: ')):
+            reverse = word[::-1] #write the words backward
+            if word == reverse:  #check for palindrome
+                print(word, 'is a palindrome') #Prints the word to the screen
+            else:
+                print(word, 'is not a palidrome')
+>>>>>>> origin/master

@@ -15,6 +15,7 @@ new text file in which all the lines from the original file are numbered from
 1 to n (where n is the number of lines)
 '''
 
+<<<<<<< HEAD
 
 filename = input("Enter file name: ")
 def enum_line(filename):
@@ -30,3 +31,18 @@ def enum_line(filename):
             
 enum_line(filename) #call the function above for testing
         
+=======
+'''Solution to number 6: Number lines on the copied version of a specific file'''
+#Open the desired file
+example = openFile(input('Enter file name: ')
+
+#open the desired file
+sep = example.splitlines()
+if ' ' in sep :
+    sep.remove(' ')
+n = len(sep)
+print(n, "is the total number of lines")
+
+for (num, line) in enumerate(sep):
+    print('%d %s' % (num + 1, line))
+>>>>>>> origin/master
