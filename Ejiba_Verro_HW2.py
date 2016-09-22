@@ -31,6 +31,9 @@ digit(10)
 digit(100)
 
 #Number 2
+''' By starting at the top of the triangle below and moving to adjacent numbers 
+on the row below, the maximum total from top to bottom Find the maximum total 
+from top to bottom of the triangle below:'''
 
 triangle= [   [75],
               [95, 64],
@@ -103,23 +106,23 @@ def collatz(n):
     Parameters:
     n - integer starting value (n >= 1)
     """
-    i = 1 #
-    if n <1: # 
+    i = 1 #will be used to count the number of terms in the chain with inital value of 1
+    if n <1: #prompts user to enter an integer n
        print("Choose and integer greater than 1.")
        n = int(input())
        collatz(n)
-    elif n ==1: # r
+    elif n ==1: # case for n = 1, 1->4->2->1 has 3 terms in the chain
         print("Your Collatz chain has 3 terms.")
         return(3)
-    else:
+    else: #Otherwise compute the numbers from the start n to deduce at 1
         while n > 1: 
-            if n%2==0: # 
+            if n%2==0: # divides by 2 if n is even, then increment i at which operation
                 n = n/2
                 i += 1
-            else: # 
+            else: # times 3 plus 1 if n is odd then increment the number of chains
                 n = 3*n+1
                 i += 1
-        print("Your Collatz chain has {0} terms.".format(i))
+        print("Your Collatz chain has {0} terms.".format(i)) #prints the number of chains
         return(i)
 
 def main(maxrange):
@@ -130,8 +133,8 @@ def main(maxrange):
     Parameters:
     maxrange - integer value for upper end of calculation range (non-inclusive)
     """
-    terms = [(n, collatz(n)) for n in range(1, maxrange)] #
-    tup = max(terms, key = lambda x: x[1]) #
+    terms = [(n, collatz(n)) for n in range(1, maxrange)] #returns the number of chains for a given int n
+    tup = max(terms, key = lambda x: x[1]) #puts the terms into a list then return the max
 
     print("The Collatz chain has {1} terms with a starting value of {0}.".format(tup[0], tup[1]))
 
@@ -139,6 +142,16 @@ def main(maxrange):
 main(1000)
 
 #Number 4
+
+'''Write a function that calculates the length of the recurring cycle for a given 
+integer. Use this function to find the value of d < 500 for which 1/d contains 
+the longest recurring cycle in its decimal fraction part.
+
+For this problem, it is sufficient to consider only denominators that are prime. All other numbers are either solely
+made up of factors of 10 (meaning the decimal expansion is finite), or are made up of factors of 10 and smaller primes
+(meaning that after some initial non-repetitive section, digits equal to the higher power of 2 or 5, repetend will be
+equal to the length of some smaller prime's repetend). Andrew Stewart
+'''
 
 def is_prime(n):
     """
@@ -161,19 +174,19 @@ def is_prime(n):
 
 
 def prime_denom(denominator):
-         # 
+         #Function to take care of when the denomination is prime 
     if 10 < denominator:
-        suborder = subgroup_order(10, denominator)
+        suborder = subgroup_order(10, denominator) 
         if denominator - 1 == suborder:
             return denominator - 1
-        elif (denominator - 1) % suborder == 0:  # 
+        elif (denominator - 1) % suborder == 0:  # checks for even division between denominator -1 and suborder then return the its factr. Otherwise return denominator - 1
             return (denominator - 1) / suborder
-        return denominator - 1  # 
-    return denominator - 1  # 
+        return denominator - 1   
+    return denominator - 1   
 
-def subgroup_order(element, modulus):
+def subgroup_order(element, modulus): #
     order = 1
-    if modulus == 2:
+    if modulus == 2: #the order is 1 for even numbers
         return order
     else:
         while (element ** order) % modulus != 1:  # 
@@ -181,7 +194,7 @@ def subgroup_order(element, modulus):
     return order
 
 
-def repetend_len(denominator):
+def repetend_len(denominator): #Get the repeating number in the denominator
     if denominator == 1:
         return int(0)
     elif is_prime(denominator):
@@ -198,6 +211,38 @@ def main():
 main()
 
 #Number 5
+
+def count(S, m, n , ans) :
+  
+  	#case where the sum of the combination is 0
+	if (n == 0) :
+		# uncomment the below line to print all the combinations also
+		# print(ans)
+		return 1
+	#For the case where the sum is < 0 return 0
+	if (n < 0) :
+		return 0
+ 
+      #
+	if (m <=0 and n >= 1) :
+		return 0
+  #Creat en empty string in which all the choices will be added and it stays the same if there is no answer
+	temp = ''
+	if(ans == '') :
+		temp = ''
+	else :
+		temp = ans + "+"
+
+	temp += str(S[m-1]) #increment temp by the number before last in the list
+
+	# recursion step
+	return count( S, m - 1, n ,ans) + count( S, m, n-S[m-1],temp)
+
+
+arr = [1, 2, 5, 10, 20, 50, 100, 200]
+m = len(arr)
+
+print("TOTAL WAYS :: " + str(count(arr, m, 200, "")))
 
 #Number 6
 import math
@@ -221,3 +266,98 @@ def is_prime(i):
         return print("{0} is a positive prime integer".format(i))
 
 #Number 7
+def srt(lst, offset = None):
+    #the case where sorting is insignificant
+    if len(lst) <2 :
+        print("There is not modification to make with the given input")
+    else:
+        #If there is no offset assigns the offset to the length of the list minus 1
+        if (offset is None): 
+            offset = len(lst) - 1
+        #Loop ends when offset is 0    
+        if (offset >= 0):
+            
+            lst = srt(lst, offset - 1)
+            elt = offset #assigns offset to elt assuming that it is the smallest index in the list
+            #Loop to search the element with the smallest index then change it
+            for r in range(offset+1, len(lst)):
+                if (lst[elt] > lst[r]):
+                    elt = r
+                    
+            nelt = lst[offset] #assign the element at the index of the offset to nelt
+            #swap the element at offset with the element at the smallest index
+            lst[offset] = lst[elt] 
+            lst[elt] = nelt
+            #print the result
+            print(str(offset+1))
+            #print the result in a single list
+            for r in range(0, len(lst)):
+                print(lst[r])
+        return lst
+        
+    
+lst= [" I ","love", "God", "and", "my", "family"]
+srt(lst)
+
+#Number 8
+def fun1(x,n):
+    """
+    the function calculates the value of f(x)=3.95*（x-x**2）with n times recursion
+    parameters:
+    x: a number in [0,1] 
+    n: numbers of recursion 
+    """
+    
+    if n == 1:        #return the value for the function f_x = 3.95*(x-x**2)
+        return 3.95*(x-x**2) 
+    else:
+        return fun1(fun1(x,1),n-1) #otherwise set the previous solution to x into the function and do this n times
+
+def fun2(x,n):
+    """
+    the function calculuates the value function f(x)=3.95*x*(1-x）through n times recursion
+    
+    parameters:
+    x: a number in [0,1] 
+    n: number of recursion 
+    """
+    if n==1:     #Initial case 
+        return 3.95*x*(1-x) 
+    else:
+        return fun2(fun2(x,1),n-1) #otherwise set the previous solution to x into the function and do this n times
+
+
+def fun3(x,n):
+    """
+    the function calculates the value of f(x)=3.95*x-3.95*(x**2) through n times recursion
+    
+    parameters:
+    x: a number in [0,1] 
+    n: number of recursion 
+    """
+    if n==1:
+        return 3.95*x-3.95*(x**2) #Intial case 
+    else:
+        return fun3(fun3(x,1),n-1) #otherwise set the previous solution to x into the function and do this n times
+
+#Test Case: n=1, n = 10, n = 50, n = 100
+print("When x = 0.5 , n = 1")
+print("the answers return: ", fun1(0.5, 1), fun2(0.5, 1), fun3(0.5,1) )
+print("When x = 0.5 , n = 2")
+print("the answers return: ", fun1(0.5, 2), fun2(0.5, 2), fun3(0.5,2) )
+print("When x = 0.5 , n = 10")
+print("the answers return: ", fun1(0.5, 10), fun2(0.5, 10), fun3(0.5,10) )
+print("When x = 0.5 , n = 50")
+print("the answers return: ", fun1(0.5, 50), fun2(0.5, 50), fun3(0.5,50) )
+print("When x = 0.5 , n = 100")
+print("the answers return: ", fun1(0.5, 100), fun2(0.5, 100), fun3(0.5,100))
+print("When x = 0.9 , n = 100")
+print("the answers return: ", fun1(0.9, 100), fun2(0.9, 100), fun3(0.9,100))
+
+'''
+Comments:
+We noticed that the functions do not yield the same answer. When the value of x 
+gets closer to 1 and when n is large there is a difference in their results.
+Fun1 decreease with increasing x and n , Fun2 decrease when 0<= x<= .5 and increase 
+otherwise with n increasing in both cases, and Fun3 decrease when x<= .5, increase 
+then decrease by the time x= .9 with increasing n for all cases '''
