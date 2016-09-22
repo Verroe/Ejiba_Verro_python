@@ -30,11 +30,20 @@ def combination(n, r):
         
 def combinatorics(total): 
     n = [1, 2, 5, 10, 20, 50, 100, 200]
-    #length = len(n)
-    for s in n:
-        for i in range(1, total): #picks the coefficient i 
-            if total == i * s:
-                print(total, i, s)
+    for r in range(1, len(n)):
+        choice = list()
+        if r == 0:
+            return 1
+        else:
+            lset= len(combination(n,r))
+            while lset <= lset:            
+                newset = set(
+            for s in new:
+                for i in range(1, total): #picks the coefficient i 
+                    if total == i * s:
+                        print(total, i, s)
+            combination(n, r)
+
             
             
             
