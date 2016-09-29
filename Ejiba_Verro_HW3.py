@@ -4,7 +4,12 @@ Created on Thu Sep 22 19:30:15 2016
 
 @author: verroejiba
 """
-
+''' The crux of your challenge is to find a way to calculate a reasonable bin size 
+or number of bins given the scale of each numeric column and plot the distribution 
+using that optimal bin. In your code, you will need to test for severe outliers 
+that could hide the true shape of the distribution, separate that part of the data,
+ and plot histograms for both segments of the distribution. You will also need 
+ to plot a boxplot of the entire distribution.'''
 #Homework3
 import pandas as pd
 import matplotlib.pyplot as plt
