@@ -42,7 +42,6 @@ def dist(file):
     separate the outliers and print plots for histograms 
     file = data to work on 
     '''
-    #gets the simple location statistics
     for c in file.columns.values :
         
         bins = optbin(file)
@@ -55,7 +54,7 @@ def dist(file):
         outliers = (file[c] < lower) | (file[c] > upper)
         
         if outliers.empty == False :
-            outliers.hist(file[c],bins) #plot the segment of data with outliers
+            outliers.hist(file[c],bin= bins) #plot the segment of data with outliers
         else:
             outliers.hist() #plot the segment of data wherever there is no outliers
         #file[c].boxplot() #plot the boxplot of the values of each column with numerical inputs'''
