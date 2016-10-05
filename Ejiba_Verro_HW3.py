@@ -25,7 +25,8 @@ diamond.columns=['Number','Carat','Colour','Clarity','Certification','Price']
 def optbin(file):
     ''' a function that calculate the optimal bin size using the Freedman Diaconis rule
     bin size = 2(iqr(x)/(n^1/3))
-    parameters:
+    
+    Parameters:
     file = the data to compute the bin size of
     '''
     loc_stat = file.describe() #gets the stat summary of the data
@@ -39,8 +40,10 @@ optbin(diamond)
 
 def dist(file):
     '''A function that takes data as input, calculates the optimal bin size, 
-    separate the outliers and print plots for histograms 
-    file = data to work on 
+    separate the outliers and print plots for histograms.
+    
+    Parameter:
+    file - data to work on 
     '''
     for c in file.columns.values :
         

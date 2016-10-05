@@ -4,14 +4,18 @@ Created on Thu Sep 22 07:37:42 2016
 
 @author: verroejiba
 """
-
+#==============================================================================
 #Number 1
 import math
-''' The 12th term is the first term to contain three digits. Write a function 
-that calculates the th term of the Fibonacci sequence. What is the index of the 
-first term in the Fibonacci sequence to contain 100 digits?
-    Parameter = d -- an interger of the desired number of digits'''
+
 def digit(d):
+    ''' The 12th term is the first term to contain three digits. Write a function 
+        that calculates the th term of the Fibonacci sequence. What is the index of the 
+        first term in the Fibonacci sequence to contain 100 digits?
+        
+        Parameter:
+        d - an interger of the desired number of digits
+    '''
     f1 = 1
     f2 = 1
     n=3     #Start at n = 3 
@@ -30,26 +34,8 @@ digit(3)
 digit(10)
 digit(100)
 
+#==============================================================================
 #Number 2
-''' By starting at the top of the triangle below and moving to adjacent numbers 
-on the row below, the maximum total from top to bottom Find the maximum total 
-from top to bottom of the triangle below:'''
-
-triangle= [   [75],
-              [95, 64],
-              [17, 47, 82],
-              [18, 35, 87, 10],
-              [20, 4, 82, 47, 65],
-              [19, 1, 23, 75, 3, 34],
-              [88, 2, 77, 73, 7, 63, 67],
-              [99, 65, 4, 28, 6, 16, 70, 92],
-              [41, 41, 26, 56, 83, 40, 80, 70, 33],
-              [41, 48, 72, 33, 47, 32, 37, 16, 94, 29],
-              [53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14],
-              [70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57],
-              [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48],
-              [63, 66, 4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
-              [4, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23]]
               
 
 def maxweight(triangle):
@@ -71,6 +57,22 @@ def maxweight(triangle):
     triangle - a list of lists containing node weights.
         Example: [[1], [2,3], [4,5,6], [7,8,9,10]]
     """
+    triangle= [   [75],
+                  [95, 64],
+                  [17, 47, 82],
+                  [18, 35, 87, 10],
+                  [20, 4, 82, 47, 65],
+                  [19, 1, 23, 75, 3, 34],
+                  [88, 2, 77, 73, 7, 63, 67],
+                  [99, 65, 4, 28, 6, 16, 70, 92],
+                  [41, 41, 26, 56, 83, 40, 80, 70, 33],
+                  [41, 48, 72, 33, 47, 32, 37, 16, 94, 29],
+                  [53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14],
+                  [70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57],
+                  [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48],
+                  [63, 66, 4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
+                  [4, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23]]
+                  
     for x in range(len(triangle)-2, -1, -1):
         for y in range(0, x+1):
             triangle[x][y] += max(triangle[x+1][y], triangle[x+1][y+1])
@@ -78,21 +80,11 @@ def maxweight(triangle):
     
 maxweight(triangle)
 
+#==============================================================================
 #Number 3
 
-"""
-The following iterative sequence is defined for the set of positive integers:
-n → n/2 (n is even) n → 3n + 1 (n is odd)
-Using the rule above and starting with 13, we generate the following sequence:
-13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1 It can be seen that this sequence (starting at 13 and
-finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz Problem), it is thought that all
-starting numbers finish at 1.
-Write a program that calculates the length of the Collatz chain for a given integer. Which starting number,
-under one thousand, produces the longest chain?
-NOTE: Once the chain starts the terms are allowed to go above one thousand.
-"""
-
 def collatz(n):
+    
     """
     This function is an implementation of the Collatz chain for starting value
     n, following this rule:
@@ -247,9 +239,11 @@ print("TOTAL WAYS :: " + str(count(arr, m, 200, "")))
 #Number 6
 import math
 
-''' Use recursion to write a function that takes a positive integer and checks if it is prime
-    parameter i = positive integer '''
 def is_prime(i):
+    ''' Use recursion to write a function that takes a positive integer and checks if it is prime
+        
+        Parameter:
+        i = positive integer '''
     
     if i <= 0: #checks if integer i is 0 or negative
         print("{0} is an invalid input. Choose a number larger than 0".format(i))
@@ -267,6 +261,12 @@ def is_prime(i):
 
 #Number 7
 def srt(lst, offset = None):
+    ''' Write a function that accepts a list of strings and uses recursion to 
+        return a sorted list. Each step should at most modify two elements of the list.
+        
+        Parameter: 
+        lst - word list 
+    '''
     #the case where sorting is insignificant
     if len(lst) <2 :
         print("There is not modification to make with the given input")
@@ -300,10 +300,12 @@ lst= [" I ","love", "God", "and", "my", "family"]
 srt(lst)
 
 #Number 8
+
 def fun1(x,n):
     """
     the function calculates the value of f(x)=3.95*（x-x**2）with n times recursion
-    parameters:
+    
+    Parameters:
     x: a number in [0,1] 
     n: numbers of recursion 
     """
@@ -314,10 +316,11 @@ def fun1(x,n):
         return fun1(fun1(x,1),n-1) #otherwise set the previous solution to x into the function and do this n times
 
 def fun2(x,n):
+    
     """
     the function calculuates the value function f(x)=3.95*x*(1-x）through n times recursion
     
-    parameters:
+    Parameters:
     x: a number in [0,1] 
     n: number of recursion 
     """
@@ -328,6 +331,7 @@ def fun2(x,n):
 
 
 def fun3(x,n):
+    
     """
     the function calculates the value of f(x)=3.95*x-3.95*(x**2) through n times recursion
     
