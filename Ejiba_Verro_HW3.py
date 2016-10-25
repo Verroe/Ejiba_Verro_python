@@ -12,13 +12,20 @@ that could hide the true shape of the distribution, separate that part of the da
  to plot a boxplot of the entire distribution.'''
 #Homework3
 import pandas as pd
-#import matplotlib.pyplot as plt
-#import numpy as np
+import matplotlib.pyplot as plt
+import numpy as np
 
 abalone = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/abalone/abalone.data')
-abalone.columns =[]
+abalone.columns =['Sex','Length','Diameter','Height','Whole weight','Shucked weight','Viscera weight'
+                    ,'Shell weight','Rings']
+                    
 income = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data')
-income.colummns = []
+income.colummns = ['AAGE','ACLSWKR','ADTIND','ADTOCC', 'AGI','AHGA','AHRSPAY','AHSCOL','AMARITL', 'AMJIND'
+                    ,'AMJOCC','ARACE', 'AREORGN', 'ASEX', 'AUNMEM','AUNTYPE','AWKSTAT', 'CAPGAIN','CAPLOSS',
+                    'DIVVAL','FEDTAX','FILESTAT','GRINREG','GRINST', 'HHDFMX','MARSUPWT', 'MIGMTR1','MIGMTR3',
+                    'MIGMTR4','MIGSAME','MIGSUN','NOEMP','PARENT', 'PEARNVAL','PEFNTVTY', 'PEMNTVTY', 'PENATVTY',
+                    'PRCITSHP','PTOTVAL','SEOTR','TAXINC','VETQVA','VETYN','WKSWORK']
+                    
 diamond = pd.read_csv('https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/Diamond.csv')
 diamond.columns=['Number','Carat','Colour','Clarity','Certification','Price']
 
@@ -43,24 +50,33 @@ def dist(file):
     separate the outliers and print plots for histograms.
     
     Parameter:
-    file - data to work on 
+    file - data  
     '''
+    #Only takes numerical values in the dataframe
+    file = file.select_dtypes(include=[np.number])
+    
     for c in file.columns.values :
         
-        bins = optbin(file)
+        bin_size = optbin(file)
         Q1 = file.quantile(.25)
         Q3 = file.quantile(.75)
+                    
+        lower = file[c].where(file[c]<(Q1 - (1.5*(Q3 - Q1)))).dropna() #gets the lower bounds dropping the missing data
+        upper = file[c].where(file[c]>(Q3 + (1.5*(Q3 - Q1)))).dropna() #gets upper bound dropping the missing data
             
-        lower = file[c].where(Q1 - (1.5*(Q3 - Q1))) #this line needs review
-        upper = file[c].where(Q3 + (1.5*(Q3 - Q1)))#this line needs review
-        
-        outliers = (file[c] < lower) | (file[c] > upper)
-        
-        if outliers.empty == False :
-            outliers.hist(file[c],bin= bins) #plot the segment of data with outliers
-        else:
-            outliers.hist() #plot the segment of data wherever there is no outliers
-        #file[c].boxplot() #plot the boxplot of the values of each column with numerical inputs'''
+        loweroutliers = file[c] < lower
+        upperoutliers = file[c] > upper
+            
+        if loweroutliers.empty == False :
+            plt.hist(loweroutliers,bin = bin_size) #plot the segment of data with outliers
+            plt.title("Lower Outlier Histogram")
+            
+        if upperoutliers.empty == False :
+            plt.hist(upperoutliers, bin = bin_size) #plot the segment of data wherever there is no outliers
+            plt.title("Upper Outlier Histogram")
+            
+        plt.boxplot(file[c]) #plot the boxplot of the values of each column with numerical inputs'''
+        #plt.show()
 
 dist(diamond)
         
